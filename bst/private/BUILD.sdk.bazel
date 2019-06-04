@@ -1,0 +1,23 @@
+"""
+This is a template file that is used to 
+generate the fdsdk_sdk for a given OS
+and architecture.
+"""
+
+load("@rules_bst//bst/private:sdk.bzl", "fdsdk_sdk")
+load("@rules_bst//bst:def.bzl", "declare_toolchains")
+
+package(default_visibility = ["//visibility:public"])
+
+fdsdk_sdk(
+    name = "fdsdk_sdk",
+    fdos = "{fdos}",
+    fdarch = "{fdarch}",
+    root_file = "ROOT",
+    tools = [":tools"],
+)
+
+declare_toolchains(
+    host = "{fdos}_{fdarch}",
+    sdk = ":fdsdk_sdk",
+)
